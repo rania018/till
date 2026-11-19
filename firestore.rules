@@ -1,0 +1,71 @@
+rules_version = '2';
+
+// Sync (src/sync/): each person's data, readable and writable only by that person, and only
+// ever encrypted on their device first (src/sync/vault.ts). Records must be sealed: the
+// plaintext form older versions of the app wrote is refused, so it can never come back.
+// Everything else in the database stays closed.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isOwner(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+
+    function isText(value, min, max) {
+      return value is string && value.size() >= min && value.size() <= max;
+    }
+
+    // A record: a random-looking id, which key sealed it, a nonce and the sealed bytes.
+    match /users/{uid}/records/{recordId} {
+      function isSealed() {
+        let data = request.resource.data;
+        return data.keys().hasOnly(['v', 'key', 'iv', 'data', 'syncedAt'])
+          && data.keys().hasAll(['v', 'key', 'iv', 'data', 'syncedAt'])
+          && data.v == 1
+          && isText(data.key, 16, 64)
+          && isText(data.iv, 16, 16)
+          && isText(data.data, 1, 700000)
+          && data.syncedAt == request.time
+          && recordId.size() <= 64;
+      }
+
+      // Delete stays open to the owner, so plaintext records from before encryption can be taken down.
+      allow read, delete: if isOwner(uid);
+      allow create, update: if isOwner(uid) && isSealed();
+    }
+
+    // The master key, locked with the passphrase and with the recovery key. Never readable without one of them.
+    match /users/{uid}/vault/{name} {
+      function isKeyDoc() {
+        let data = request.resource.data;
+        let passphrase = data.passphrase;
+        let recovery = data.recovery;
+        return name == 'key'
+          && data.keys().hasOnly(['v', 'keyId', 'passphrase', 'recovery', 'updatedAt'])
+          && data.keys().hasAll(['v', 'keyId', 'passphrase', 'recovery', 'updatedAt'])
+          && data.v == 1
+          && isText(data.keyId, 16, 64)
+          && passphrase is map
+          && passphrase.keys().hasOnly(['salt', 'iterations', 'iv', 'wrapped'])
+          && passphrase.keys().hasAll(['salt', 'iterations', 'iv', 'wrapped'])
+          && isText(passphrase.salt, 16, 64)
+          && passphrase.iterations is int
+          && passphrase.iterations >= 100000
+          && passphrase.iterations <= 10000000
+          && isText(passphrase.iv, 16, 16)
+          && isText(passphrase.wrapped, 16, 256)
+          && recovery is map
+          && recovery.keys().hasOnly(['iv', 'wrapped'])
+          && recovery.keys().hasAll(['iv', 'wrapped'])
+          && isText(recovery.iv, 16, 16)
+          && isText(recovery.wrapped, 16, 256)
+          && data.updatedAt == request.time;
+      }
+
+      allow read, delete: if isOwner(uid);
+      allow create: if isOwner(uid) && isKeyDoc();
+      // A new passphrase or recovery key locks the same master key: the key id can't change.
+      // A new key only comes after the old one is deleted, with everything sealed by it.
+      allow update: if isOwner(uid) && isKeyDoc() && request.resource.data.keyId == resource.data.keyId;
+    }
+  }
+}

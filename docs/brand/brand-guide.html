@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Till brand guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* Tokens: Plum as the one accent, Damson ink, Paper background, Petal tint. No second hue: the hours-of-work card is Damson with Lilac figures.
+     Layout: a 72ch guide column with full-width specimen bands; every section is a flat card grid. */
+  :root {
+    --plum: #5E2B7E;
+    --plum-deep: #4A2064;
+    --lilac: #C9A0E0;
+    --petal: #F0E6F5;
+    --paper: #F7F4F8;
+    --damson: #1A1222;
+
+    --bg: var(--paper);
+    --surface: #FFFFFF;
+    --surface-2: #ECE6EF;
+    --ink: var(--damson);
+    --ink-2: #4A3F52;
+    --muted: #6B5F73;
+    --line: #E4DDE8;
+    --accent: var(--plum);
+    --accent-soft: var(--petal);
+    --on-accent: #FFFFFF;
+    --good: #006300; --good-soft: #E3F5E3;
+    --warn: #7A5000; --warn-soft: #FFF4D6;
+    --crit: #B02A2A; --crit-soft: #FDE8E8;
+
+    --font: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #120C18; --surface: #1C1424; --surface-2: #261B30;
+      --ink: #EFE8F3; --ink-2: #C8BBD0; --muted: #9A8DA3; --line: #352742;
+      --accent: var(--lilac); --accent-soft: #2E1E3D; --on-accent: #120C18;
+      --good: #0CA30C; --good-soft: #12301A; --warn: #F5C451; --warn-soft: #33270B; --crit: #F07B7B; --crit-soft: #3A1616;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #120C18; --surface: #1C1424; --surface-2: #261B30;
+    --ink: #EFE8F3; --ink-2: #C8BBD0; --muted: #9A8DA3; --line: #352742;
+    --accent: var(--lilac); --accent-soft: #2E1E3D; --on-accent: #120C18;
+    --good: #0CA30C; --good-soft: #12301A; --warn: #F5C451; --warn-soft: #33270B; --crit: #F07B7B; --crit-soft: #3A1616;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: var(--font); font-size: 15px; line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { text-wrap: balance; margin: 0; line-height: 1.15; letter-spacing: -0.015em; }
+  h1 { font-size: clamp(40px, 7vw, 64px); font-weight: 800; letter-spacing: -0.03em; }
+  h2 { font-size: 26px; font-weight: 800; }
+  h3 { font-size: 17px; font-weight: 700; }
+  h4 { font-size: 13px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  p { margin: 0; max-width: 68ch; }
+  p + p { margin-top: 10px; }
+  a { color: var(--accent); }
+  code { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 0.92em; background: var(--surface-2); padding: 1px 6px; border-radius: 6px; }
+  .num { font-variant-numeric: tabular-nums; }
+
+  .wrap { width: min(1100px, 100% - 32px); margin: 0 auto; }
+  header.hero { padding: 56px 0 40px; border-bottom: 1px solid var(--line); }
+  .hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; }
+  .hero .eyebrow { color: var(--accent); font-weight: 700; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .hero .tagline { font-size: 22px; font-weight: 600; color: var(--ink-2); margin-top: 12px; max-width: 30ch; }
+  .hero p.lead { margin-top: 18px; color: var(--ink-2); }
+  .hero-logo { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 36px; display: grid; place-items: center; }
+  .hero-logo svg { width: min(100%, 320px); height: auto; }
+
+  section { padding: 48px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: 0; }
+  .sec-head { display: grid; grid-template-columns: 220px 1fr; gap: 24px; margin-bottom: 28px; }
+  .sec-head .n { color: var(--muted); font-weight: 700; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; padding-top: 6px; }
+  .sec-head p { color: var(--ink-2); margin-top: 8px; }
+
+  .grid { display: grid; gap: 16px; }
+  .g2 { grid-template-columns: repeat(2, 1fr); }
+  .g3 { grid-template-columns: repeat(3, 1fr); }
+  .g4 { grid-template-columns: repeat(4, 1fr); }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 20px; }
+  .card h3 { margin-bottom: 8px; }
+  .card p { color: var(--ink-2); font-size: 14px; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 4px 10px; font-size: 12px; font-weight: 700; background: var(--accent-soft); color: var(--accent); }
+
+  /* Logo specimens */
+  .spec { display: grid; place-items: center; border-radius: 18px; min-height: 180px; padding: 28px; border: 1px solid var(--line); }
+  .spec.light { background: #FFFFFF; color: #1A1222; }
+  .spec.paper { background: #F7F4F8; color: #1A1222; }
+  .spec.plum { background: #5E2B7E; color: #FFFFFF; border-color: #5E2B7E; }
+  .spec.damson { background: #1A1222; color: #C9A0E0; border-color: #1A1222; }
+  .spec svg { height: 64px; width: auto; }
+  .spec-label { font-size: 12px; color: var(--muted); margin-top: 8px; font-weight: 600; }
+  .construct { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 20px; }
+  .construct svg { width: 100%; height: auto; display: block; }
+  .icons-row { display: flex; gap: 20px; align-items: flex-end; flex-wrap: wrap; }
+  .icons-row figure { margin: 0; text-align: center; font-size: 12px; color: var(--muted); font-weight: 600; }
+  .icons-row figure svg { display: block; margin: 0 auto 8px; border-radius: 22%; box-shadow: 0 8px 24px rgba(26,18,34,.14); }
+  .donts li { margin: 6px 0; }
+  ul.clean { list-style: none; padding: 0; margin: 0; }
+  ul.clean li { padding: 8px 0; border-top: 1px solid var(--line); font-size: 14px; color: var(--ink-2); display: flex; justify-content: space-between; gap: 12px; }
+  ul.clean li:first-child { border-top: 0; }
+  ul.clean li b { color: var(--ink); font-weight: 700; }
+
+  /* Colors */
+  .swatches { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+  .sw { border-radius: 16px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); }
+  .sw .chip { height: 96px; display: flex; align-items: flex-end; padding: 10px 12px; font-weight: 800; font-size: 13px; }
+  .sw .meta { padding: 10px 12px 12px; font-size: 12px; color: var(--muted); line-height: 1.45; }
+  .sw .meta b { display: block; color: var(--ink); font-size: 13px; }
+  .contrast { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .contrast th, .contrast td { text-align: left; padding: 9px 10px; border-top: 1px solid var(--line); }
+  .contrast th { color: var(--muted); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; border-top: 0; }
+  .dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; vertical-align: -2px; margin-right: 8px; border: 1px solid rgba(0,0,0,.08); }
+  .status { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .status .s { border-radius: 14px; padding: 14px; font-weight: 700; font-size: 14px; display: flex; gap: 10px; align-items: center; }
+  .series { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .series span { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink-2); }
+  .series i { width: 18px; height: 18px; border-radius: 5px; display: inline-block; }
+
+  /* Type */
+  .type-sample { display: grid; grid-template-columns: 150px 1fr; gap: 16px; padding: 14px 0; border-top: 1px solid var(--line); align-items: baseline; }
+  .type-sample:first-child { border-top: 0; }
+  .type-sample .k { font-size: 12px; color: var(--muted); font-weight: 600; }
+  .t-display { font-size: 40px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; }
+  .t-title { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; }
+  .t-head { font-size: 17px; font-weight: 700; }
+  .t-body { font-size: 15px; font-weight: 500; }
+  .t-cap { font-size: 12px; font-weight: 600; color: var(--muted); }
+  .ledger { font-variant-numeric: tabular-nums; list-style: none; padding: 0; margin: 0; }
+  .ledger li { display: flex; justify-content: space-between; padding: 8px 0; border-top: 1px solid var(--line); font-size: 15px; }
+  .ledger li:first-child { border-top: 0; }
+  .ledger li span:last-child { font-weight: 700; }
+  .ledger li .in { color: var(--good); }
+
+  /* Voice */
+  .say { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .say .q { border-radius: 14px; padding: 14px 16px; font-size: 14px; border: 1px solid var(--line); }
+  .say .q.no { background: var(--crit-soft); color: var(--ink); }
+  .say .q.yes { background: var(--good-soft); color: var(--ink); }
+  .say .q small { display: block; font-weight: 800; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
+  .say .q.no small { color: var(--crit); }
+  .say .q.yes small { color: var(--good); }
+
+  /* In use: phone mock */
+  .inuse { display: grid; grid-template-columns: 300px 1fr; gap: 32px; align-items: start; }
+  .phone { width: 300px; border-radius: 40px; background: var(--damson); padding: 12px; box-shadow: 0 24px 60px rgba(26,18,34,.25); }
+  .screen { border-radius: 30px; background: var(--paper); color: var(--damson); overflow: hidden; min-height: 600px; display: flex; flex-direction: column; font-size: 13px; }
+  .screen .top { padding: 18px 18px 6px; display: flex; justify-content: space-between; align-items: flex-start; }
+  .screen .top .d1 { font-weight: 800; font-size: 15px; }
+  .screen .top .d2 { color: #6B5F73; font-size: 12px; font-weight: 600; }
+  .screen .hcard { margin: 8px 14px 0; background: #FFFFFF; border: 1px solid #E4DDE8; border-radius: 18px; padding: 16px; }
+  .screen .hcard .k { color: #6B5F73; font-weight: 700; font-size: 12px; }
+  .screen .hcard .big { font-size: 34px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; margin-top: 2px; }
+  .screen .hcard .sub { color: #4A3F52; font-size: 12px; margin-top: 4px; font-weight: 600; }
+  .bar { height: 10px; border-radius: 999px; background: #ECE6EF; overflow: hidden; margin-top: 12px; }
+  .bar i { display: block; height: 100%; width: 73%; background: #5E2B7E; border-radius: 999px; }
+  .screen .safe { margin-top: 10px; display: inline-flex; gap: 6px; align-items: center; background: #F0E6F5; color: #5E2B7E; border-radius: 999px; padding: 4px 10px; font-weight: 800; font-size: 12px; }
+  .alerts { margin: 10px 14px 0; display: grid; gap: 6px; }
+  .alerts div { border-radius: 12px; padding: 9px 12px; font-weight: 700; font-size: 12px; display: flex; gap: 8px; align-items: center; }
+  .a-crit { background: #FDE8E8; color: #B02A2A; }
+  .a-warn { background: #FFF4D6; color: #7A5000; }
+  .a-info { background: #FFFFFF; border: 1px solid #E4DDE8; color: #1A1222; }
+  .stats3 { margin: 10px 14px 0; display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; }
+  .stats3 div { background: #FFFFFF; border: 1px solid #E4DDE8; border-radius: 14px; padding: 10px; }
+  .stats3 .k { color: #6B5F73; font-size: 11px; font-weight: 700; }
+  .stats3 .v { font-weight: 800; font-size: 15px; letter-spacing: -0.02em; }
+  .worth { margin: 10px 14px 0; background: #1A1222; color: #EFE8F3; border-radius: 16px; padding: 14px; }
+  .worth .k { color: #9A8DA3; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; }
+  .worth .v { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin-top: 2px; }
+  .worth .v b { color: #C9A0E0; }
+  .worth .s { color: #C8BBD0; font-size: 12px; margin-top: 2px; }
+  .tabbar { margin-top: auto; background: #FFFFFF; border-top: 1px solid #E4DDE8; display: grid; grid-template-columns: repeat(5,1fr); padding: 10px 6px 16px; font-size: 10px; font-weight: 700; color: #6B5F73; text-align: center; align-items: end; }
+  .tabbar .on { color: #5E2B7E; }
+  .tabbar .add { width: 48px; height: 48px; border-radius: 50%; background: #5E2B7E; color: #fff; display: grid; place-items: center; margin: -22px auto 0; font-size: 26px; font-weight: 500; box-shadow: 0 8px 18px rgba(94,43,126,.35); }
+  .tabbar svg { width: 20px; height: 20px; display: block; margin: 0 auto 3px; }
+  .splash { border-radius: 18px; background: var(--plum); color: #fff; padding: 28px; display: grid; place-items: center; min-height: 200px; text-align: center; }
+  .splash svg { width: 72px; height: 72px; }
+  .splash .w { font-weight: 800; font-size: 26px; letter-spacing: -0.03em; margin-top: 10px; }
+  .splash .t { opacity: .8; font-weight: 600; font-size: 13px; }
+  .listing { border-radius: 18px; border: 1px solid var(--line); background: var(--surface); padding: 18px; display: grid; grid-template-columns: 64px 1fr; gap: 14px; align-items: center; }
+  .listing svg { width: 64px; height: 64px; border-radius: 16px; }
+  .listing .n { font-weight: 800; font-size: 18px; letter-spacing: -0.02em; }
+  .listing .s { color: var(--muted); font-size: 13px; }
+  .listing .btn { display: inline-block; margin-top: 8px; background: var(--accent); color: var(--on-accent); border-radius: 999px; padding: 6px 16px; font-weight: 800; font-size: 13px; }
+
+  .files { font-size: 13px; }
+  .files li { padding: 6px 0; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 12px; color: var(--ink-2); }
+  .files li:first-child { border-top: 0; }
+  footer { padding: 32px 0 56px; color: var(--muted); font-size: 13px; }
+
+  @media (max-width: 900px) {
+    .hero-grid, .sec-head, .inuse, .g4, .g3, .g2, .say { grid-template-columns: 1fr; }
+    .g4, .g3 { grid-template-columns: repeat(2, 1fr); }
+    .swatches { grid-template-columns: repeat(3, 1fr); }
+    .status { grid-template-columns: 1fr; }
+    .phone { width: 100%; max-width: 320px; }
+  }
+  @media (max-width: 520px) {
+    .g4, .g3, .swatches { grid-template-columns: 1fr 1fr; }
+    .type-sample { grid-template-columns: 1fr; gap: 4px; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .bar i { transition: width .4s ease; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Brand guide · Till</div>
+      <h1>Till</h1>
+      <div class="tagline">What’s left till payday.</div>
+      <p class="lead">Till is a personal budget that counts the way you actually live: in pay cycles, in cash you can hold, and in hours of work. The brand is calm and exact. One plum, one typeface, numbers that are easy to read, and color only where it means something.</p>
+      <p class="lead" style="margin-top:12px"><span class="pill">Calm</span> &nbsp;<span class="pill">Exact</span> &nbsp;<span class="pill">On your side</span></p>
+    </div>
+    <div class="hero-logo">
+      <svg viewBox="0 0 176 100" role="img" aria-label="till wordmark">
+        <g fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 40H58"/><path d="M38 18V66q0 16 16 16h8"/><path d="M90 40V82"/><path d="M122 14V82"/><path d="M154 14V82"/>
+        </g>
+        <circle cx="90" cy="19" r="8" fill="var(--accent)"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section id="idea">
+  <div class="sec-head">
+    <div class="n">01 · The idea</div>
+    <div>
+      <h2>A budget that speaks your units</h2>
+      <p>Most finance apps talk in months and bank balances. Till talks in the three units a salaried person already thinks in. Every brand decision below follows from these three.</p>
+    </div>
+  </div>
+  <div class="grid g3">
+    <div class="card">
+      <h3>Left till payday</h3>
+      <p>The one number that matters, shown first and shown big. Each “month” in Till is one pay cycle, from payday to the day before the next one.</p>
+    </div>
+    <div class="card">
+      <h3>Cash you can count</h3>
+      <p>Two wallets, cash and card. A cash count catches what you forgot to log. The name nods to the till, the drawer where the cash lives.</p>
+    </div>
+    <div class="card">
+      <h3>Prices in hours of work</h3>
+      <p>“Is it worth it?” turns 6,500 DA into 9 h 20 min of your time. This is Till’s signature feature, and it gets the one dark card on the home screen.</p>
+    </div>
+  </div>
+</section>
+
+<section id="name">
+  <div class="sec-head">
+    <div class="n">02 · The name</div>
+    <div>
+      <h2>Why “Till”</h2>
+      <p>Four letters, one syllable, two meanings that are both true. <b>Till</b> as in <i>until payday</i>, the countdown the home screen is built around. And <b>till</b> as in the cash drawer, the place you keep and count your money. It is easy to say in English, French and Arabic, works as a verb in copy (“Till it”), and the lowercase word is made only of stems, which lets the wordmark be drawn rather than typed.</p>
+    </div>
+  </div>
+  <div class="grid g2">
+    <div class="card">
+      <h3>Till <span class="pill">recommended</span></h3>
+      <p>Tagline: “What’s left till payday.” Short descriptor for stores: “Budget by pay cycle, cash and hours of work.”</p>
+    </div>
+    <div class="card">
+      <h3>Pace</h3>
+      <p>Alternative. Centers on the daily safe-to-spend figure and the budget-pace line in Stats. Clean, but it says less about cash and hours.</p>
+    </div>
+  </div>
+</section>
+
+<section id="logo">
+  <div class="sec-head">
+    <div class="n">03 · Logo</div>
+    <div>
+      <h2>A “t” whose crossbar is a budget bar</h2>
+      <p>The mark is a lowercase t drawn with one stroke weight. Its crossbar is a progress bar: the solid part is what you have spent, the faint part is what is left till payday. The same t opens the wordmark, where the dot of the i is a coin in Plum. Nothing else is decorated.</p>
+    </div>
+  </div>
+
+  <div class="grid g2" style="margin-bottom:16px">
+    <div class="construct">
+      <h4 style="margin-bottom:10px">Mark construction · 100 unit grid, 14 unit stroke</h4>
+      <svg viewBox="0 0 118 100" aria-label="Mark construction grid">
+        <defs>
+          <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+            <path d="M10 0H0V10" fill="none" stroke="var(--line)" stroke-width=".6"/>
+          </pattern>
+        </defs>
+        <rect width="118" height="100" fill="url(#grid)"/>
+        <g fill="none" stroke="var(--line)" stroke-width=".8" stroke-dasharray="2 2">
+          <path d="M0 40H118"/><path d="M38 0V100"/><path d="M0 18H118"/><path d="M0 82H118"/>
+        </g>
+        <g fill="none" stroke="var(--accent)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 40H84" opacity=".3"/><path d="M20 40H58"/><path d="M38 18V66q0 16 16 16h8"/>
+        </g>
+        <g font-size="4" font-weight="700" fill="var(--muted)" font-family="Manrope, sans-serif">
+          <text x="100" y="37">x-height</text><text x="100" y="15.5">t top</text><text x="100" y="79.5">baseline</text>
+          <text x="62" y="54">spent</text><text x="74" y="30">left</text>
+        </g>
+      </svg>
+    </div>
+    <div class="construct">
+      <h4 style="margin-bottom:10px">Wordmark · same stroke, the i-dot is a coin</h4>
+      <svg viewBox="0 0 196 100" aria-label="Wordmark construction">
+        <defs>
+          <pattern id="grid2" width="10" height="10" patternUnits="userSpaceOnUse">
+            <path d="M10 0H0V10" fill="none" stroke="var(--line)" stroke-width=".6"/>
+          </pattern>
+        </defs>
+        <rect width="196" height="100" fill="url(#grid2)"/>
+        <g fill="none" stroke="var(--line)" stroke-width=".8" stroke-dasharray="2 2">
+          <path d="M0 40H196"/><path d="M0 14H196"/><path d="M0 82H196"/>
+        </g>
+        <g fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 40H58"/><path d="M38 18V66q0 16 16 16h8"/><path d="M90 40V82"/><path d="M122 14V82"/><path d="M154 14V82"/>
+        </g>
+        <circle cx="90" cy="19" r="8" fill="var(--accent)"/>
+        <g font-size="4" font-weight="700" fill="var(--muted)" font-family="Manrope, sans-serif">
+          <text x="170" y="12">ascender</text><text x="170" y="38">x-height</text><text x="170" y="80">baseline</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <div class="grid g4" style="margin-bottom:16px">
+    <div>
+      <div class="spec light">
+        <svg viewBox="0 0 176 100"><g fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"><path d="M20 40H58"/><path d="M38 18V66q0 16 16 16h8"/><path d="M90 40V82"/><path d="M122 14V82"/><path d="M154 14V82"/></g><circle cx="90" cy="19" r="8" fill="#5E2B7E"/></svg>
+      </div>
+      <div class="spec-label">Primary · Damson with a plum coin</div>
+    </div>
+    <div>
+      <div class="spec plum">
+        <svg viewBox="0 0 176 100"><g fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"><path d="M20 40H58"/><path d="M38 18V66q0 16 16 16h8"/><path d="M90 40V82"/><path d="M122 14V82"/><path d="M154 14V82"/></g><circle cx="90" cy="19" r="8" fill="#C9A0E0"/></svg>
+      </div>
+      <div class="spec-label">On plum · white with a lilac coin</div>
+    </div>
+    <div>
+      <div class="spec damson">
+        <svg viewBox="0 0 176 100"><g fill="none" stroke="#EFE8F3" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"><path d="M20 40H58"/><path d="M38 18V66q0 16 16 16h8"/><path d="M90 40V82"/><path d="M122 14V82"/><path d="M154 14V82"/></g><circle cx="90" cy="19" r="8" fill="#C9A0E0"/></svg>
+      </div>
+      <div class="spec-label">Dark · for dark mode and splash</div>
+    </div>
+    <div>
+      <div class="spec paper">
+        <svg viewBox="0 0 300 100"><rect x="8" y="8" width="84" height="84" rx="20" fill="#5E2B7E"/><g transform="translate(50 50) scale(.62) translate(-52 -50)" fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"><path d="M20 40H84" opacity=".35"/><path d="M20 40H58"/><path d="M38 18V66q0 16 16 16h8"/></g><g transform="translate(112 0)"><g fill="none" stroke="#1A1222" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"><path d="M20 40H58"/><path d="M38 18V66q0 16 16 16h8"/><path d="M90 40V82"/><path d="M122 14V82"/><path d="M154 14V82"/></g><circle cx="90" cy="19" r="8" fill="#5E2B7E"/></g></svg>
+      </div>
+      <div class="spec-label">Lockup · icon + wordmark, for store pages</div>
+    </div>
+  </div>
+
+  <div class="grid g2">
+    <div class="card">
+      <h4 style="margin-bottom:14px">App icon</h4>
+      <div class="icons-row">
+        <figure>
+          <svg width="96" height="96" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#5E2B7E"/><g transform="translate(256 256) scale(3.4) translate(-52 -50)" fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"><path d="M20 40H84" opacity=".35"/><path d="M20 40H58"/><path d="M38 18V66q0 16 16 16h8"/></g></svg>
+          Light
+        </figure>
+        <figure>
+          <svg width="96" height="96" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#1A1222"/><g transform="translate(256 256) scale(3.4) translate(-52 -50)" fill="none" stroke="#C9A0E0" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"><path d="M20 40H84" opacity=".35"/><path d="M20 40H58"/><path d="M38 18V66q0 16 16 16h8"/></g></svg>
+          Dark
+        </figure>
+        <figure>
+          <svg width="48" height="48" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#5E2B7E"/><g transform="translate(50 50) scale(.86) translate(-52 -50)" fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"><path d="M20 40H84" opacity=".35"/><path d="M20 40H58"/><path d="M38 18V66q0 16 16 16h8"/></g></svg>
+          Favicon 48
+        </figure>
+        <figure>
+          <svg width="24" height="24" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#5E2B7E"/><g transform="translate(50 50) scale(.86) translate(-52 -50)" fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"><path d="M20 40H84" opacity=".35"/><path d="M20 40H58"/><path d="M38 18V66q0 16 16 16h8"/></g></svg>
+          24
+        </figure>
+        <figure>
+          <svg width="96" height="96" viewBox="0 0 100 100" style="box-shadow:none;color:var(--ink)"><g fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"><path d="M20 40H84" opacity=".3"/><path d="M20 40H58"/><path d="M38 18V66q0 16 16 16h8"/></g></svg>
+          Mono mark
+        </figure>
+      </div>
+      <p style="margin-top:14px">The mark fills 52% of the tile, so it stays readable at 24 px and leaves a maskable safe zone on Android. In the mono version the “left” part of the bar is the same color at 30% opacity, never grey.</p>
+    </div>
+    <div class="card">
+      <h4 style="margin-bottom:10px">Rules</h4>
+      <ul class="clean">
+        <li><b>Clear space</b><span>One stroke width (14 units) on every side</span></li>
+        <li><b>Minimum size</b><span>Mark 20 px · Wordmark 64 px wide · Lockup 120 px</span></li>
+        <li><b>Colors</b><span>Damson, white, Plum or Lilac only; coin in Plum or Lilac</span></li>
+        <li><b>Bar fill</b><span>Fixed at 60% in all static uses; the live app may animate it</span></li>
+        <li><b>Never</b><span>Gradients, shadows on the mark, outlines, rotation, stretching, typing “Till” in another font next to it</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="color">
+  <div class="sec-head">
+    <div class="n">04 · Color</div>
+    <div>
+      <h2>One plum, used sparingly</h2>
+      <p>Plum is the brand, and it appears in small doses: the coin, the primary button, the progress bar, a link. It is rare in finance, warm without being loud, and deep enough to carry white text anywhere. Most of every screen is Paper, white and Damson, with neutrals that lean faintly violet so the accent feels at home. Status colors (good, careful, over) keep their meaning because nothing else is green, amber or red. All text pairs below meet WCAG AA; ratios are measured.</p>
+    </div>
+  </div>
+
+  <div class="swatches" style="margin-bottom:16px">
+    <div class="sw"><div class="chip" style="background:#5E2B7E;color:#fff">Plum</div><div class="meta"><b>#5E2B7E</b>Primary. Buttons, links, progress, the coin. 9.9:1 on white.</div></div>
+    <div class="sw"><div class="chip" style="background:#1A1222;color:#EFE8F3">Damson</div><div class="meta"><b>#1A1222</b>Ink. All text on light, the Worth-it card, the wordmark.</div></div>
+    <div class="sw"><div class="chip" style="background:#C9A0E0;color:#120C18">Lilac</div><div class="meta"><b>#C9A0E0</b>Accent on dark. 8.8:1 on the dark canvas. The coin on plum and on Damson.</div></div>
+    <div class="sw"><div class="chip" style="background:#F0E6F5;color:#5E2B7E">Petal</div><div class="meta"><b>#F0E6F5</b>Tint. Soft chips, selected states, the background behind the accent.</div></div>
+    <div class="sw"><div class="chip" style="background:#F7F4F8;color:#1A1222;border-bottom:1px solid #E4DDE8">Paper</div><div class="meta"><b>#F7F4F8</b>Canvas. Cards are pure white on it; lines are #E4DDE8.</div></div>
+    <div class="sw"><div class="chip" style="background:#6B5F73;color:#fff">Mauve</div><div class="meta"><b>#6B5F73</b>Muted text and icons. 6.0:1 on white. Dark canvas is #120C18.</div></div>
+  </div>
+
+  <div class="grid g2">
+    <div class="card">
+      <h4 style="margin-bottom:10px">Measured contrast · WCAG 2.1</h4>
+      <table class="contrast num">
+        <thead><tr><th>Pair</th><th>Ratio</th><th>Use</th></tr></thead>
+        <tbody>
+          <tr><td><span class="dot" style="background:#5E2B7E"></span>Plum on white</td><td>9.89</td><td>Text, icons, AAA at any size</td></tr>
+          <tr><td><span class="dot" style="background:#fff"></span>White on Plum</td><td>9.89</td><td>Primary button label</td></tr>
+          <tr><td><span class="dot" style="background:#5E2B7E"></span>Plum on Petal</td><td>8.17</td><td>Soft chips</td></tr>
+          <tr><td><span class="dot" style="background:#1A1222"></span>Damson on Paper</td><td>16.69</td><td>Body text</td></tr>
+          <tr><td><span class="dot" style="background:#C9A0E0"></span>Lilac on dark canvas</td><td>8.78</td><td>Dark-mode accent, the hours figure</td></tr>
+          <tr><td><span class="dot" style="background:#6B5F73"></span>Mauve on white</td><td>5.98</td><td>Captions and labels</td></tr>
+          <tr><td><span class="dot" style="background:#C8BBD0"></span>Light mauve on dark canvas</td><td>10.51</td><td>Dark-mode captions</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h4 style="margin-bottom:10px">Status · always with an icon and a word</h4>
+      <div class="status">
+        <div class="s" style="background:var(--good-soft);color:var(--good)">● Good · under budget</div>
+        <div class="s" style="background:var(--warn-soft);color:var(--warn)">▲ Careful · at 92%</div>
+        <div class="s" style="background:var(--crit-soft);color:var(--crit)">■ Over · 400 DA over</div>
+      </div>
+      <h4 style="margin:18px 0 10px">Chart series · colorblind-checked, fixed order</h4>
+      <div class="series">
+        <span><i style="background:#2A78D6"></i>Series 1</span>
+        <span><i style="background:#EB6834"></i>Series 2</span>
+        <span><i style="background:#1BAF7A"></i>Series 3</span>
+        <span><i style="background:#EDA100"></i>Series 4</span>
+        <span><i style="background:#9AA6A2"></i>Other</span>
+      </div>
+      <p style="margin-top:14px">Status and chart colors are functional, not brand. They never appear in the logo, on the splash screen or in marketing, and the brand never borrows them, so green always means good and red always means over.</p>
+    </div>
+  </div>
+
+</section>
+
+<section id="type">
+  <div class="sec-head">
+    <div class="n">05 · Typography</div>
+    <div>
+      <h2>Manrope, heavy for numbers, light on words</h2>
+      <p>One family for everything, which keeps the app small and fully offline. Manrope’s geometric forms match the drawn wordmark, and its tabular figures line up in lists. Amounts are the hero: set them ExtraBold with tight tracking, and keep labels small and quiet.</p>
+    </div>
+  </div>
+  <div class="grid g2">
+    <div class="card">
+      <div class="type-sample"><div class="k">Display · 40 / 800 / −0.03em</div><div class="t-display num">9,700 DA</div></div>
+      <div class="type-sample"><div class="k">Title · 24 / 800 / −0.02em</div><div class="t-title">Set up your budget</div></div>
+      <div class="type-sample"><div class="k">Heading · 17 / 700</div><div class="t-head">Where it went</div></div>
+      <div class="type-sample"><div class="k">Body · 15 / 500</div><div class="t-body">No expenses logged this week. Anything to add?</div></div>
+      <div class="type-sample"><div class="k">Caption · 12 / 600</div><div class="t-cap">OF 35,800 · 10 DAYS TO PAYDAY</div></div>
+    </div>
+    <div class="card">
+      <h4 style="margin-bottom:10px">Tabular figures in a list</h4>
+      <ul class="ledger">
+        <li><span>Coffee · Eating out</span><span>−250</span></li>
+        <li><span>Internet · Bills</span><span>−2,000</span></li>
+        <li><span>Salary · Income</span><span class="in">+60,000</span></li>
+        <li><span>Laptop fund · To a goal</span><span>−8,000</span></li>
+      </ul>
+      <p style="margin-top:14px">Use <code>font-variant-numeric: tabular-nums</code> wherever digits sit in columns. Amounts always carry the currency once per screen, not on every line.</p>
+      <h4 style="margin:18px 0 6px">Arabic and French</h4>
+      <p>Manrope has no Arabic glyphs. For an Arabic interface, pair it with <b>IBM Plex Sans Arabic</b> at the same weights; it shares Manrope’s low contrast and open counters. French works in Manrope as is.</p>
+    </div>
+  </div>
+</section>
+
+<section id="voice">
+  <div class="sec-head">
+    <div class="n">06 · Voice</div>
+    <div>
+      <h2>Calm, plain, on your side</h2>
+      <p>Till talks like a friend who is good with money: states the fact, says what it means, never scolds. No exclamation marks, no finance jargon, no guilt. Second person, present tense, short sentences.</p>
+    </div>
+  </div>
+  <div class="say">
+    <div class="q no"><small>Not this</small>Warning! You have exceeded your Shopping budget allocation.</div>
+    <div class="q yes"><small>This</small>Shopping is 400 DA over budget.</div>
+    <div class="q no"><small>Not this</small>Remaining balance: 9,700.00 DZD</div>
+    <div class="q yes"><small>This</small>Left to spend: 9,700 DA · 10 days to payday</div>
+    <div class="q no"><small>Not this</small>You haven’t tracked anything. Don’t fall behind!</div>
+    <div class="q yes"><small>This</small>No expenses logged this week. Anything to add?</div>
+    <div class="q no"><small>Not this</small>Purchase cost analysis</div>
+    <div class="q yes"><small>This</small>That’s 9 h 20 min of work. Worth it?</div>
+  </div>
+</section>
+
+<section id="inuse">
+  <div class="sec-head">
+    <div class="n">07 · In use</div>
+    <div>
+      <h2>The brand on the home screen</h2>
+      <p>The app already follows these tokens, so adopting the brand is mostly a name change: the icon, the splash screen, the store listing and the word “Till” in the top bar. The Worth-it card is the one dark card, so the hours figure stands out without a second color.</p>
+    </div>
+  </div>
+  <div class="inuse">
+    <div class="phone">
+      <div class="screen">
+        <div class="top">
+          <div><div class="d1">Sunday 15 November</div><div class="d2">25 Oct – 24 Nov</div></div>
+          <svg width="28" height="28" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#5E2B7E"/><g transform="translate(50 50) scale(.86) translate(-52 -50)" fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"><path d="M20 40H84" opacity=".35"/><path d="M20 40H58"/><path d="M38 18V66q0 16 16 16h8"/></g></svg>
+        </div>
+        <div class="hcard">
+          <div class="k">Left to spend</div>
+          <div class="big num">9,700 DA</div>
+          <div class="sub num">of 35,800 · 10 days to payday</div>
+          <div class="bar"><i></i></div>
+          <div class="safe num">Safe to spend 970 DA / day</div>
+        </div>
+        <div class="alerts">
+          <div class="a-crit">■ Shopping is 400 DA over budget</div>
+          <div class="a-warn">▲ Eating out is at 92% of budget</div>
+          <div class="a-info">▦ Internet (2,000) due Tuesday</div>
+        </div>
+        <div class="stats3 num">
+          <div><div class="k">Spent</div><div class="v">38,300</div></div>
+          <div><div class="k">Income</div><div class="v">60,000</div></div>
+          <div><div class="k">Saved</div><div class="v">8,000</div></div>
+        </div>
+        <div class="worth">
+          <div class="k">Is it worth it?</div>
+          <div class="v num">6,500 DA = <b>9 h 20 min</b></div>
+          <div class="s">of work · 1.3 days · pushes Laptop back 2 weeks</div>
+        </div>
+        <div class="tabbar">
+          <div class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Home</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Activity</div>
+          <div><div class="add">+</div></div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 10h18"/></svg>Plan</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Stats</div>
+        </div>
+      </div>
+    </div>
+    <div class="grid" style="gap:16px">
+      <div class="splash">
+        <div>
+          <svg viewBox="0 0 100 100"><g fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"><path d="M20 40H84" opacity=".35"/><path d="M20 40H58"/><path d="M38 18V66q0 16 16 16h8"/></g></svg>
+          <div class="w">till</div>
+          <div class="t">What’s left till payday.</div>
+        </div>
+      </div>
+      <div class="listing">
+        <svg viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#5E2B7E"/><g transform="translate(256 256) scale(3.4) translate(-52 -50)" fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"><path d="M20 40H84" opacity=".35"/><path d="M20 40H58"/><path d="M38 18V66q0 16 16 16h8"/></g></svg>
+        <div>
+          <div class="n">Till</div>
+          <div class="s">Budget by pay cycle, cash and hours of work. Works offline.</div>
+          <span class="btn">Install</span>
+        </div>
+      </div>
+      <div class="card">
+        <h4 style="margin-bottom:8px">To adopt it in the app</h4>
+        <ul class="files">
+          <li><span>Manifest name / short name</span><b>Till</b></li>
+          <li><span>Icons (192, 512, maskable, Apple 180)</span><span>from <code>till-icon.svg</code></span></li>
+          <li><span>Favicon</span><span><code>till-favicon.svg</code></span></li>
+          <li><span>Theme color light / dark</span><span class="num">#F7F4F8 / #120C18</span></li>
+          <li><span>Copy</span><span>“Expense Tracker” → “Till” in i18n and manifest</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="wrap">
+  Till brand proposal · 31 October 2026 · Assets live in <code>docs/brand/</code>: mark, wordmark, lockup, app icon (light, dark), favicon, mono versions, all SVG.
+</footer>
+
+</body>
+</html>

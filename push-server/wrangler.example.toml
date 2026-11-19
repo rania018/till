@@ -1,0 +1,27 @@
+# Cloudflare Worker that sends the app's reminders as Web Push while the app is closed.
+# Free plan: cron triggers, KV and 100k requests a day, no card needed.
+#
+# Copy to wrangler.toml, or let `pnpm push:deploy` do it: it fills in every REPLACE_WITH_* value below.
+# wrangler.toml is yours alone and is never committed.
+name = "till-push"
+main = "src/index.ts"
+compatibility_date = "2025-06-01"
+
+[triggers]
+crons = ["*/15 * * * *"]
+
+[observability]
+enabled = true
+
+[vars]
+# Public half of the VAPID key pair; the private half is a secret (wrangler secret put VAPID_PRIVATE_KEY).
+VAPID_PUBLIC_KEY = "REPLACE_WITH_VAPID_PUBLIC_KEY"
+# Who to contact about this push sender: a URL or a mailto: address.
+VAPID_SUBJECT = "REPLACE_WITH_SUBJECT"
+# Browsers on these origins may call the API: your site's addresses only, never localhost
+# (`pnpm push:dev` adds localhost for itself through push-server/.dev.vars).
+ALLOWED_ORIGINS = "REPLACE_WITH_SITE_ORIGINS"
+
+[[kv_namespaces]]
+binding = "DEVICES"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"

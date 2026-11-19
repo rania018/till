@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f7f4f8" />
+    <meta name="description" content="Till: what’s left till payday, budgets, bills, savings goals, and prices in hours of work." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Till" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <title>Till</title>
+    <script>
+      // Apply the saved theme before the first paint, so dark mode doesn't flash white.
+      // useApplyTheme keeps this localStorage copy in sync with Settings.
+      ;(function () {
+        var choice = 'system'
+        try {
+          choice = localStorage.getItem('expense-tracker:theme') || 'system'
+        } catch (e) {
+          // Storage blocked: follow the system setting.
+        }
+        var dark = choice === 'dark' || (choice === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light'
+        document.querySelector('meta[name="theme-color"]').content = dark ? '#120c18' : '#f7f4f8'
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,304 @@
+@import "tailwindcss";
+
+/* The theme is `data-theme` on <html>: set before first paint by the script in
+   index.html, then kept in sync with Settings by useApplyTheme. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* A computer: a large screen and a mouse. Tablets are just as wide, but they're
+   used with fingers, so they keep the roomier layouts. Same query as useIsDesktop. */
+@custom-variant desk (@media (min-width: 1024px) and (pointer: fine));
+/* The same, on screen only: a landscape page is wide enough to count as a computer, and paper keeps its own layout. */
+@custom-variant desk-screen (@media screen and (min-width: 1024px) and (pointer: fine));
+
+/* Semantic colors that switch with the theme. Components use bg-surface,
+   text-ink, border-line… and never need dark: variants for color.
+   Values come from the approved visual preview. */
+@theme inline {
+  --font-sans: "Manrope", "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-on-accent: var(--on-accent);
+
+  /* Status: only for good / careful / over, always paired with an icon and label. */
+  --color-good: var(--good);
+  --color-good-ink: var(--good-ink);
+  --color-good-soft: var(--good-soft);
+  --color-warn: var(--warn);
+  --color-warn-ink: var(--warn-ink);
+  --color-warn-soft: var(--warn-soft);
+  --color-crit: var(--crit);
+  --color-crit-ink: var(--crit-ink);
+  --color-crit-soft: var(--crit-soft);
+
+  /* Chart series, colorblind-checked in this order; past 4 it's "Other". */
+  --color-series-1: var(--series-1);
+  --color-series-2: var(--series-2);
+  --color-series-3: var(--series-3);
+  --color-series-4: var(--series-4);
+  --color-series-other: var(--series-other);
+}
+
+@theme {
+  --animate-sheet-in: sheet-in 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  --animate-sheet-out: sheet-out 180ms ease-in;
+  --animate-pop-in: pop-in 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  --animate-fade-in: fade-in 200ms ease-out;
+  --animate-fade-out: fade-out 160ms ease-in;
+  --animate-shake: shake 320ms ease-in-out;
+  --animate-panel-in: panel-in 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* The details panel comes in from the end side: the right, or the left in Arabic. */
+  @keyframes panel-in {
+    from { opacity: 0; translate: calc(var(--panel-from, 1) * 2rem) 0; }
+  }
+  @keyframes sheet-in {
+    from { transform: translateY(100%); }
+  }
+  @keyframes sheet-out {
+    to { transform: translateY(100%); }
+  }
+  @keyframes pop-in {
+    from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+  }
+  @keyframes fade-out {
+    to { opacity: 0; }
+  }
+  /* A wrong PIN. */
+  @keyframes shake {
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+  }
+}
+
+:root {
+  /* Till brand (docs/brand/BRAND.md): Plum accent, Damson ink, Paper canvas, Petal tint. */
+  --bg: #f7f4f8;
+  --surface: #ffffff;
+  --surface-2: #ece6ef;
+  --ink: #1a1222;
+  --ink-2: #4a3f52;
+  --muted: #6b5f73;
+  --line: #e4dde8;
+  --accent: #5e2b7e;
+  --accent-soft: #f0e6f5;
+  --on-accent: #ffffff;
+  --good: #0ca30c;
+  --good-ink: #006300;
+  --good-soft: #e3f5e3;
+  --warn: #fab219;
+  --warn-ink: #7a5000;
+  --warn-soft: #fff4d6;
+  --crit: #d03b3b;
+  --crit-ink: #b02a2a;
+  --crit-soft: #fde8e8;
+  /* Pastels (user's choice, 2026-11-06), checked with the dataviz validator: in this order every
+     neighbour stays apart for colour-blind readers. Series 1-4 are a run of neighbours from it. */
+  --series-1: #69bafd;
+  --series-2: #ed9f5b;
+  --series-3: #24c9d8;
+  --series-4: #ccb14b;
+  --series-other: #b9b3c0;
+  /* A colour for each main category, by its slot. */
+  --cat-1: #f8928a;
+  --cat-2: #a4aafe;
+  --cat-3: #90c472;
+  --cat-4: #69bafd;
+  --cat-5: #ed9f5b;
+  --cat-6: #24c9d8;
+  --cat-7: #ccb14b;
+  --cat-8: #d698e4;
+  --cat-other: #b9b3c0;
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg: #120c18;
+  --surface: #1c1424;
+  --surface-2: #261b30;
+  --ink: #efe8f3;
+  --ink-2: #c8bbd0;
+  --muted: #9a8da3;
+  --line: #352742;
+  --accent: #c9a0e0;
+  --accent-soft: #2e1e3d;
+  --on-accent: #120c18;
+  --good-ink: #22b52f;
+  --good-soft: #12301a;
+  --warn-ink: #f5c451;
+  --warn-soft: #33270b;
+  --crit-ink: #f07b7b;
+  --crit-soft: #3a1616;
+  /* True pastels on the dark theme: lighter than the validator's dark band, at the user's request,
+     but still apart for colour-blind readers (worst neighbours: CVD 13.6, normal vision 16.2). */
+  --series-1: #82c5fd;
+  --series-2: #f0ae77;
+  --series-3: #5ed1de;
+  --series-4: #d3bd6c;
+  --series-other: #9a93a3;
+  --cat-1: #faa39c;
+  --cat-2: #b1b7fe;
+  --cat-3: #a0cd88;
+  --cat-4: #82c5fd;
+  --cat-5: #f0ae77;
+  --cat-6: #5ed1de;
+  --cat-7: #d3bd6c;
+  --cat-8: #dca8e8;
+  --cat-other: #9a93a3;
+  color-scheme: dark;
+}
+
+/* Sized for a laptop at 125% display scaling, where a 16px root read as huge: a 14.4px root,
+   with small text kept at 12 and 13.5px so it stays easy to read. Everything is sized in rem,
+   so the root steps below scale the whole app up on big screens instead of leaving empty space. */
+@media (min-width: 1024px) and (pointer: fine) {
+  /* Keeps the top bar in place between short pages and long ones that scroll. The
+     gutter already holds the scrollbar's room, so an open sheet must not add it again. */
+  html {
+    font-size: 90%;
+    scrollbar-gutter: stable;
+  }
+
+  html body[data-scroll-locked] {
+    margin-right: 0 !important;
+  }
+
+  /* Arabic letters read smaller than Latin ones at the same size. */
+  html:lang(ar) {
+    font-size: 95.625%;
+  }
+
+  :root {
+    --text-xs: 0.8333rem;
+    --text-sm: 0.9375rem;
+    --radius-xl: 0.625rem;
+    --radius-2xl: 0.75rem;
+    --radius-3xl: 1rem;
+  }
+}
+
+@media (min-width: 1700px) and (pointer: fine) {
+  html {
+    font-size: 95.625%;
+  }
+
+  html:lang(ar) {
+    font-size: 101.25%;
+  }
+}
+
+@media (min-width: 2300px) and (pointer: fine) {
+  html {
+    font-size: 106.875%;
+  }
+
+  html:lang(ar) {
+    font-size: 112.5%;
+  }
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Letter spacing pulls joined Arabic letters apart. */
+  :lang(ar) * {
+    letter-spacing: 0 !important;
+  }
+
+  /* Arabic letters reach further below the line: big amounts need the room. */
+  :lang(ar) :is(.text-4xl, .text-5xl) {
+    line-height: 1.35 !important;
+  }
+
+  body {
+    @apply bg-bg font-sans text-ink antialiased;
+    font-synthesis: none;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+/* Paper: the year report printed or saved as a PDF. Light colours whatever the theme, the app's own
+   controls left out, and colours kept as they are so the month bars print. */
+@media print {
+  :root,
+  [data-theme="dark"] {
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --surface-2: #f3eef5;
+    --ink: #1a1222;
+    --ink-2: #4a3f52;
+    --muted: #6b5f73;
+    --line: #ddd5e2;
+    --accent: #5e2b7e;
+    --accent-soft: #f0e6f5;
+    --on-accent: #ffffff;
+    --good-ink: #006300;
+    --crit-ink: #b02a2a;
+    --warn-ink: #7a5000;
+    --series-1: #69bafd;
+    --series-2: #ed9f5b;
+    --series-3: #24c9d8;
+    --series-4: #ccb14b;
+    --series-other: #b9b3c0;
+    --cat-1: #f8928a;
+    --cat-2: #a4aafe;
+    --cat-3: #90c472;
+    --cat-4: #69bafd;
+    --cat-5: #ed9f5b;
+    --cat-6: #24c9d8;
+    --cat-7: #ccb14b;
+    --cat-8: #d698e4;
+    --cat-other: #b9b3c0;
+    color-scheme: light;
+  }
+
+  * {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  header a,
+  header button,
+  #skip-link {
+    display: none !important;
+  }
+
+  @page {
+    margin: 14mm;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+[dir='rtl'] {
+  --panel-from: -1;
+}
